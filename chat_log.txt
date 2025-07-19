@@ -1,0 +1,159 @@
+[2025-07-16 23:29:46.847181] User: hello
+[2025-07-16 23:29:46.847181] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-16 23:46:34.899558] User: hello
+[2025-07-16 23:46:34.899558] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-16 23:53:00.580132] User: hi
+[2025-07-16 23:53:00.580132] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-17 00:08:24.819725] User: hi
+[2025-07-17 00:08:24.819725] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-17 00:29:03.991564] User: hi
+[2025-07-17 00:29:03.991564] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-17 00:29:58.205202] User: hi
+[2025-07-17 00:29:58.205202] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-17 00:30:18.989718] User: hello
+[2025-07-17 00:30:18.989718] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-17 00:48:15.973064] User: hi
+[2025-07-17 00:48:15.973064] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mistral-saba-24b` requires terms acceptance. Please have the org admin accept the terms at https://console.groq.com/playground?model=mistral-saba-24b', 'type': 'invalid_request_error', 'code': 'model_terms_required'}}
+
+[2025-07-17 01:02:03.004048] User: hi
+[2025-07-17 01:02:03.004048] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mistral-saba-24b` requires terms acceptance. Please have the org admin accept the terms at https://console.groq.com/playground?model=mistral-saba-24b', 'type': 'invalid_request_error', 'code': 'model_terms_required'}}
+
+[2025-07-17 01:14:06.690771] User: hi
+[2025-07-17 01:14:06.690771] Bot: ❌ Error: An output parsing error occurred. In order to pass this error back to the agent and have it try again, pass `handle_parsing_errors=True` to the AgentExecutor. This is the error: Could not parse LLM output: `To provide a helpful response, I need to understand what kind of assistance you require. Are you looking for information on a specific topic, help with a particular task, or something else?`
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+
+[2025-07-17 01:29:42.999867] User: hey !!ola
+[2025-07-17 01:29:42.999867] Bot: ❌ Error: An output parsing error occurred. In order to pass this error back to the agent and have it try again, pass `handle_parsing_errors=True` to the AgentExecutor. This is the error: Could not parse LLM output: `It seems like you're just saying "hello." How can I help you today?`
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+
+[2025-07-17 01:39:34.318073] User: ola!!
+[2025-07-17 01:39:34.318073] Bot: ola!
+
+[2025-07-17 01:44:11.893664] User: hi help me to understand time and space complixity in lay man term because i am biggner in programming
+[2025-07-17 01:44:11.893664] Bot: ❌ Error: An output parsing error occurred. In order to pass this error back to the agent and have it try again, pass `handle_parsing_errors=True` to the AgentExecutor. This is the error: Could not parse LLM output: `To help you understand time and space complexity in layman's terms, I'll explain them using simple analogies and examples.
+
+### Time Complexity
+Time complexity refers to how the running time of an algorithm increases as the size of the input increases. It's about how long an algorithm takes to complete.
+
+**Analogy:**
+Think of it like cooking a meal. If you're making a simple sandwich, it takes a few minutes. But if you're making a complex dish with multiple steps, it takes much longer. Similarly, some algorithms are quick (like finding an item in a sorted list), while others are slow (like searching through an unsorted list).
+
+**Example:**
+- **Linear Search:** Imagine you're looking for a specific book in a library. If the books are not organized, you might have to check each shelf one by one. This is like a linear search, where the time it takes increases with the number of books.
+- **Binary Search:** Now, if the books are sorted by title, you can quickly narrow down your search. This is like a binary search, where the time it takes doesn't increase as much with the number of books.
+
+### Space Complexity
+Space complexity refers to how much memory an algorithm uses as the size of the input increases. It's about how much storage space an algorithm needs.
+
+**Analogy:**
+Think of it like organizing a party. If you're having a small gathering, you only need a small apartment. But if you're having a big party, you need a large hall. Similarly, some algorithms use a lot of memory (like storing a large array), while others use less (like using a single variable).
+
+**Example:**
+- **Storing a Large Array:** If you need to store a large list of numbers, you need a lot of memory. This is like having a big party and needing a large hall.
+- **Using a Single Variable:** If you only need to keep track of a single value, you don't need much memory. This is like having a small gathering and needing a small apartment.
+
+### Summary
+- **Time Complexity:** How long it takes to run an algorithm.
+- **Space Complexity:** How much memory it uses.
+
+Understanding these concepts helps you choose the right algorithms for your tasks, especially when dealing with large datasets.`
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+
+[2025-07-17 02:20:25.941959] User: namasty kya aap muje recursion ke baare m bata sakte hai
+[2025-07-17 02:20:25.941959] Bot: Namaste! Recursion in Python is a technique where a function calls itself to solve a problem by breaking it down into smaller, more manageable subproblems. This method is often used for tasks that can be divided into simpler instances of the same task. For example, calculating the factorial of a number or traversing a tree data structure are common use cases where recursion is applied.
+
+Here’s a simple example to illustrate recursion in Python:
+
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+```
+
+In this example, the `factorial` function calls itself with a decremented value of `n` until it reaches the base case where `n` is 0. This approach can help solve complex problems more elegantly by breaking them down into simpler parts.
+
+[2025-07-18 04:24:17.656126] User: hello can you help me to understand bhagwat geeta
+[2025-07-18 04:24:17.656126] Bot: The Bhagavad Gita is a sacred Hindu scripture that is part of the Indian epic Mahabharata. It is a dialogue between the warrior Arjuna and his charioteer, Lord Krishna, who is an avatar of the god Vishnu. The conversation takes place on the battlefield of Kurukshetra, just before the start of a great war. The Gita addresses various aspects of life, duty, and spirituality, including the concepts of dharma, karma, and yoga. It provides guidance on how to live virtuously and find one's purpose in life. The text is divided into 18 chapters and 700 verses, covering topics such as the nature of reality, the self, and the ultimate goal of life. The Gita emphasizes the idea that individuals are divine and encourages them to fulfill their duties (dharma) while maintaining a detached and selfless attitude. It presents different paths to spiritual realization, including the path of knowledge (jnana yoga), the path of devotion (bhakti yoga), and the path of action (karma yoga).
+
+[2025-07-18 04:46:15.313026] User: Hola, ¿qué puedes hacer?
+[2025-07-18 04:46:15.313026] Bot: ❌ Error: An output parsing error occurred. In order to pass this error back to the agent and have it try again, pass `handle_parsing_errors=True` to the AgentExecutor. This is the error: Could not parse LLM output: `Thought: I can process information, answer questions, and perform web searches to provide current information. I can also assist with a variety of tasks including but not limited to answering general knowledge questions, providing explanations, and offering recommendations.`
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+
+[2025-07-18 04:46:40.164640] User: hi what you can do
+[2025-07-18 04:46:40.164640] Bot: ❌ Error: An output parsing error occurred. In order to pass this error back to the agent and have it try again, pass `handle_parsing_errors=True` to the AgentExecutor. This is the error: Could not parse LLM output: `Thought: I can provide a brief overview of my capabilities based on the tools I have access to.`
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+
+[2025-07-18 04:47:05.886863] User: hi what you can do
+[2025-07-18 04:47:05.886863] Bot: ❌ Error: An output parsing error occurred. In order to pass this error back to the agent and have it try again, pass `handle_parsing_errors=True` to the AgentExecutor. This is the error: Could not parse LLM output: `Thought: I need to provide an overview of my capabilities.`
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+
+[2025-07-18 05:02:54.569814] User: Hola, ¿qué puedes hacer?
+[2025-07-18 05:02:54.569814] Bot: Puedo responder preguntas, proporcionar información y ayudar con una variedad de tareas. También puedo realizar búsquedas en la web para encontrar información actualizada.
+
+[2025-07-18 05:04:57.036365] User: வணக்கம், நீங்கள் என்ன செய்ய முடியும்?
+[2025-07-18 05:04:57.036365] Bot: வணக்கம், நான் உங்களுக்கு உதவ முடியும். உங்களுக்கு என்ன கேள்வி அல்லது பிரச்சினை  உள்ளது? (Vaṇakkam, nāṉ uṅkaḷukku utava mudiyum. Uṅkaḷuku enna kēḷvi ora piraccinai uḷḷatu?)
+
+[2025-07-18 05:13:34.181923] User: hi what you can do 
+[2025-07-18 05:13:34.181923] Bot: ❌ Error: An output parsing error occurred. In order to pass this error back to the agent and have it try again, pass `handle_parsing_errors=True` to the AgentExecutor. This is the error: Could not parse LLM output: `I can help answer a wide range of questions, perform web searches to find current information, and provide information based on the data I've been trained on (up to 2023). I can also help with explanations, definitions, and general knowledge.
+
+How can I assist you today?`
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+
+[2025-07-18 05:16:13.176496] User: hi what you can do 
+[2025-07-18 05:16:13.176496] Bot: ❌ Error: An output parsing error occurred. In order to pass this error back to the agent and have it try again, pass `handle_parsing_errors=True` to the AgentExecutor. This is the error: Could not parse LLM output: `I can perform web searches to gather information based on the questions you ask. I can also provide explanations, answer questions based on the data I've been trained on (up to 2021), and help with a variety of tasks. How can I assist you today?`
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+
+[2025-07-18 05:30:10.063247] User: hi what you can do are you multilungal
+[2025-07-18 05:30:10.063247] Bot: Yes, I can understand and generate text in multiple languages, although my capabilities and proficiency may vary depending on the language. I can provide information, answer questions, and engage in conversation in several languages.
+
+[2025-07-18 05:50:24.113595] User: ola!!
+[2025-07-18 05:50:24.113595] Bot: Hello! How can I help you today?
+
+[2025-07-18 05:51:30.793107] User: tell me jole in hindi
+[2025-07-18 05:51:30.793107] Bot: The translation of "jole" in Hindi is "गंड" (Gand).
+
+[2025-07-18 23:15:55.028489] User: hi
+[2025-07-18 23:15:55.028489] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-18 23:37:57.364454] User: hi can you help me in RAG implementation
+[2025-07-18 23:37:57.364454] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-19 13:57:37.626978] User: hi
+[2025-07-19 13:57:37.626978] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-19 13:58:10.203229] User: hi
+[2025-07-19 13:58:10.203229] Bot: ❌ Error: Error code: 404 - {'error': {'message': 'The model `llama-3-70b` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+
+[2025-07-19 15:10:37.922993] User: hi
+[2025-07-19 15:10:37.923994] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-19 15:38:31.888524] User: hi
+[2025-07-19 15:38:31.888524] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-19 15:39:00.205588] User: hi
+[2025-07-19 15:39:00.205588] Bot: ❌ Error: Error code: 404 - {'error': {'message': 'The model `llama-3-70b` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+
+[2025-07-19 17:12:05.424765] User: hello
+[2025-07-19 17:12:05.424765] Bot: ❌ Error: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+
+[2025-07-19 17:13:27.347555] User: hi
+[2025-07-19 17:13:27.347555] Bot: Hello! How can I assist you today?
+
+[2025-07-19 17:13:44.067184] User: tell me about your self
+[2025-07-19 17:13:44.067184] Bot: I'm an AI assistant designed to help you with a wide range of tasks and questions. I can provide information, answer questions, and assist with various topics. How can I assist you today?
+
+[2025-07-19 17:44:53.112964] User: hello
+[2025-07-19 17:44:53.112964] Bot: Hello! How can I assist you today?
+
+[2025-07-19 18:12:10.803150] User: hi
+[2025-07-19 18:12:10.803150] Bot: Hello! How can I assist you today?
+
