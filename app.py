@@ -15,49 +15,48 @@ serpapi_api_key = os.getenv("SERPAPI_API_KEY")
 # --- Page Setup ---
 st.set_page_config(page_title="LangChain Chatbot", layout="wide")
 
-# --- Custom Logo and Styling ---
+# --- Custom CSS ---
 st.markdown("""
-    <style>
-        .sidebar-logo {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        .sidebar-logo img {
-            width: 100px;
-            height: auto;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-        .chat-bubble {
-            background-color: #1e1e1e;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            margin: 5px 0;
-            animation: fadeIn 0.3s ease-in-out;
-            max-width: 80%;
-        }
-        .chat-bubble.bot {
-            background-color: #2f2f2f;
-        }
-        @keyframes fadeIn {
-            from {opacity: 0; transform: translateY(5px);}
-            to {opacity: 1; transform: translateY(0);}
-        }
-    </style>
+<style>
+    .chat-bubble {
+        background-color: #1e1e1e;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 20px;
+        margin: 5px 0;
+        animation: fadeIn 0.3s ease-in-out;
+        max-width: 80%;
+    }
+    .chat-bubble.bot {
+        background-color: #2f2f2f;
+    }
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(5px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+    footer {visibility: hidden;}
+    .custom-footer {
+        position: fixed;
+        bottom: 0;
+        right: 20px;
+        font-size: 12px;
+        color: #ccc;
+    }
+    .custom-footer img {
+        height: 24px;
+        border-radius: 50%;
+        margin-left: 8px;
+        vertical-align: middle;
+    }
+</style>
 """, unsafe_allow_html=True)
 
 # --- Sidebar UI ---
 with st.sidebar:
-    st.markdown("""
-        <div class="sidebar-logo">
-            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712039.png" alt="Bot Logo">
-        </div>
-    """, unsafe_allow_html=True)
-
-    st.title("LangChain Chatbot")
+    st.image("https://cdn-icons-png.flaticon.com/512/4712/4712039.png", width=80)
+    st.title("LangChain\nChatbot")
     st.markdown("---")
+
     st.header("⚙️ Settings")
     temperature = st.slider("Temperature", 0.0, 1.0, 0.7, 0.1)
     use_web_search = st.checkbox("🔍 Enable Web Search", value=True)
@@ -71,6 +70,28 @@ with st.sidebar:
             file_name="chat_log.txt",
             mime="text/plain"
         )
+
+    # --- Bot Info / About Section ---
+    with st.expander("ℹ️ About this Chatbot"):
+        st.markdown("""
+        **LangChain Chatbot** is an AI assistant powered by [LangChain](https://www.langchain.com/),
+        integrated with Groq LLMs and optional web search via SerpAPI.
+
+        **Usage:**
+        - Type your message below.
+        - The chatbot auto-selects the best available model based on performance.
+        - Enable "Web Search" to fetch live results using SerpAPI.
+
+        **Model fallback order:**
+        1. `llama3-70b-8192`
+        2. `llama3-8b-8192`
+        3. `mistral-saba-24b`
+
+        **Contact:**
+        - GitHub: [123ShubhamVardani](https://github.com/123ShubhamVardani)
+        - LinkedIn: [Shubham Vardani](https://www.linkedin.com/in/shubham-vardani-325428174/)
+        - Email: [shub.vardani@gmail.com](mailto:shub.vardani@gmail.com)
+        """)
 
 # --- Model Fallback Chain ---
 model_fallbacks = ["llama3-70b-8192", "llama3-8b-8192", "mistral-saba-24b"]
@@ -93,7 +114,7 @@ if not llm:
     st.error("❌ Failed to initialize any supported Groq models.")
     st.stop()
 
-st.sidebar.markdown(f"<p>🧠 <b>Using model:</b> <code style='color:lightgreen'>{selected_model}</code></p>", unsafe_allow_html=True)
+st.sidebar.markdown(f"<span style='color: pink;'>🧠 Using model:</span> <code>{selected_model}</code>", unsafe_allow_html=True)
 
 # --- Tool Integration ---
 tools = []
@@ -127,10 +148,12 @@ BOT_AVATAR = "https://cdn-icons-png.flaticon.com/512/4712/4712039.png"
 # --- Chat UI ---
 user_input = st.chat_input("Type your message here...")
 
+# Render past chat messages
 for msg in st.session_state.chat_history:
     with st.chat_message(msg["role"], avatar=USER_AVATAR if msg["role"] == "user" else BOT_AVATAR):
         st.markdown(f"<div class='chat-bubble'>{msg['content']}</div>", unsafe_allow_html=True)
 
+# Handle new input
 if user_input:
     st.chat_message("user", avatar=USER_AVATAR).markdown(f"<div class='chat-bubble'>{user_input}</div>", unsafe_allow_html=True)
     st.session_state.chat_history.append({"role": "user", "content": user_input})
@@ -143,6 +166,14 @@ if user_input:
     st.chat_message("assistant", avatar=BOT_AVATAR).markdown(f"<div class='chat-bubble bot'>{response}</div>", unsafe_allow_html=True)
     st.session_state.chat_history.append({"role": "assistant", "content": response})
 
+    # Save conversation to file
     with open("chat_log.txt", "a", encoding="utf-8") as f:
         f.write(f"[{datetime.now()}] User: {user_input}\n")
         f.write(f"[{datetime.now()}] Bot: {response}\n\n")
+
+# --- Footer with DP ---
+st.markdown("""
+<div class="custom-footer">
+    Created by Shubham Vardani <img src="https://avatars.githubusercontent.com/u/104264016?v=4">
+</div>
+""", unsafe_allow_html=True)
