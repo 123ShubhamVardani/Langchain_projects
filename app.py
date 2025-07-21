@@ -18,12 +18,6 @@ st.set_page_config(page_title="LangChain Chatbot", layout="wide")
 # --- Custom CSS ---
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap');
-
-    html, body, [class*="css"]  {
-        font-family: 'Outfit', sans-serif;
-    }
-
     .chat-bubble {
         background-color: #1e1e1e;
         color: white;
@@ -41,18 +35,20 @@ st.markdown("""
         to {opacity: 1; transform: translateY(0);}
     }
     footer {visibility: hidden;}
-    .footer-container {
+    .custom-footer {
         position: fixed;
         bottom: 10px;
-        right: 10px;
+        right: 20px;
+        font-size: 12px;
+        color: #ccc;
         z-index: 9999;
     }
-    .footer-container img {
-        width: 45px;
-        height: 45px;
+    .custom-footer img {
+        height: 40px;
         border-radius: 50%;
-        border: 2px solid #fff;
-        box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.5);
+        border: 2px solid white;
+        margin-left: 8px;
+        vertical-align: middle;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -80,13 +76,13 @@ with st.sidebar:
     # --- Bot Info / About Section ---
     with st.expander("ℹ️ About this Chatbot"):
         st.markdown("""
-        **LangChain Chatbot** is an AI assistant powered by [LangChain](https://www.langchain.com/),
-        integrated with Groq LLMs and optional web search via SerpAPI.
+        **LangChain Chatbot** is an AI assistant powered by [LangChain](https://www.langchain.com/), integrated with Groq LLMs and optional web search via SerpAPI.
 
-        **Usage:**
-        - Type your message below.
-        - The chatbot auto-selects the best available model based on performance.
-        - Enable "Web Search" to fetch live results using SerpAPI.
+        **Features:**
+        - 🔄 Auto model fallback logic
+        - 🌐 Optional web search via SerpAPI
+        - 💬 Natural and responsive UI
+        - 📥 Downloadable chat logs
 
         **Model fallback order:**
         1. `llama3-70b-8192`
@@ -99,7 +95,7 @@ with st.sidebar:
         - Email: [shub.vardani@gmail.com](mailto:shub.vardani@gmail.com)
         """)
 
-# --- Model Fallback Chain ---
+# --- Model Fallback ---
 model_fallbacks = ["llama3-70b-8192", "llama3-8b-8192", "mistral-saba-24b"]
 llm, selected_model = None, None
 
@@ -147,19 +143,17 @@ agent = initialize_agent(
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
-# --- Avatar Icons ---
+# --- Avatars ---
 USER_AVATAR = "https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
 BOT_AVATAR = "https://cdn-icons-png.flaticon.com/512/4712/4712039.png"
 
 # --- Chat UI ---
 user_input = st.chat_input("Type your message here...")
 
-# Render past chat messages
 for msg in st.session_state.chat_history:
     with st.chat_message(msg["role"], avatar=USER_AVATAR if msg["role"] == "user" else BOT_AVATAR):
         st.markdown(f"<div class='chat-bubble'>{msg['content']}</div>", unsafe_allow_html=True)
 
-# Handle new input
 if user_input:
     st.chat_message("user", avatar=USER_AVATAR).markdown(f"<div class='chat-bubble'>{user_input}</div>", unsafe_allow_html=True)
     st.session_state.chat_history.append({"role": "user", "content": user_input})
@@ -172,14 +166,14 @@ if user_input:
     st.chat_message("assistant", avatar=BOT_AVATAR).markdown(f"<div class='chat-bubble bot'>{response}</div>", unsafe_allow_html=True)
     st.session_state.chat_history.append({"role": "assistant", "content": response})
 
-    # Save conversation to file
     with open("chat_log.txt", "a", encoding="utf-8") as f:
         f.write(f"[{datetime.now()}] User: {user_input}\n")
         f.write(f"[{datetime.now()}] Bot: {response}\n\n")
 
 # --- Footer with DP ---
 st.markdown("""
-    <div class="footer-container">
-        <img src="https://raw.githubusercontent.com/123ShubhamVardani/langchain-chatbot/main/shubham_dp.png" alt="Profile DP">
-    </div>
+<div class="custom-footer">
+    Created by Shubham Vardani
+    <img src="https://raw.githubusercontent.com/123ShubhamVardani/langchain-chatbot/main/shubham_dp.png">
+</div>
 """, unsafe_allow_html=True)
