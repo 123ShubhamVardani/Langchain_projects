@@ -9,8 +9,8 @@ from langchain_community.utilities import SerpAPIWrapper
 
 # --- Load API Keys ---
 load_dotenv()
-groq_api_key = "gsk_YpUgKC85bnkbj4ka5QTFWdyb3FYP5gckvfMEDHpGhibJ0mzhJPV" #os.getenv("GROQ_API_KEY")
-serpapi_api_key = "" #os.getenv("SERPAPI_API_KEY")
+groq_api_key = os.getenv("GROQ_API_KEY")
+serpapi_api_key = os.getenv("SERPAPI_API_KEY")
 
 # --- Page Setup ---
 st.set_page_config(page_title="LangChain Chatbot", layout="wide")
@@ -18,6 +18,12 @@ st.set_page_config(page_title="LangChain Chatbot", layout="wide")
 # --- Custom CSS ---
 st.markdown("""
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap');
+
+    html, body, [class*="css"]  {
+        font-family: 'Outfit', sans-serif;
+    }
+
     .chat-bubble {
         background-color: #1e1e1e;
         color: white;
@@ -34,26 +40,26 @@ st.markdown("""
         from {opacity: 0; transform: translateY(5px);}
         to {opacity: 1; transform: translateY(0);}
     }
+
     footer {visibility: hidden;}
-    .custom-footer {
+
+    .footer-container {
         position: fixed;
         bottom: 10px;
-        right: 20px;
-        font-size: 12px;
-        color: #ccc;
+        right: 10px;
         z-index: 9999;
     }
-    .custom-footer img {
-        height: 40px;
+    .footer-container img {
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
-        border: 2px solid white;
-        margin-left: 8px;
-        vertical-align: middle;
+        border: 2px solid #fff;
+        box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.5);
     }
 </style>
 """, unsafe_allow_html=True)
 
-# --- Sidebar UI ---
+# --- Sidebar ---
 with st.sidebar:
     st.image("https://cdn-icons-png.flaticon.com/512/4712/4712039.png", width=80)
     st.title("LangChain\nChatbot")
@@ -62,29 +68,30 @@ with st.sidebar:
     st.header("⚙️ Settings")
     temperature = st.slider("Temperature", 0.0, 1.0, 0.7, 0.1)
     use_web_search = st.checkbox("🔍 Enable Web Search", value=True)
+    manual_mode = st.toggle("🧩 Manual Model Selection", value=False)
+
+    model_options = ["llama3-70b-8192", "llama3-8b-8192", "mistral-saba-24b"]
+    selected_model = None
+
+    if manual_mode:
+        selected_model = st.selectbox("Select Groq Model", model_options)
 
     if os.path.exists("chat_log.txt"):
         with open("chat_log.txt", "r", encoding="utf-8") as f:
             chat_log = f.read()
-        st.download_button(
-            label="📁 Download Chat Log",
-            data=chat_log,
-            file_name="chat_log.txt",
-            mime="text/plain"
-        )
+        st.download_button("📁 Download Chat Log", data=chat_log, file_name="chat_log.txt", mime="text/plain")
 
-    # --- Bot Info / About Section ---
     with st.expander("ℹ️ About this Chatbot"):
         st.markdown("""
-        **LangChain Chatbot** is an AI assistant powered by [LangChain](https://www.langchain.com/), integrated with Groq LLMs and optional web search via SerpAPI.
+        **LangChain Chatbot** is powered by [LangChain](https://www.langchain.com/), 
+        integrated with Groq LLMs and optional live search using SerpAPI.
 
-        **Features:**
-        - 🔄 Auto model fallback logic
-        - 🌐 Optional web search via SerpAPI
-        - 💬 Natural and responsive UI
-        - 📥 Downloadable chat logs
+        **Usage:**
+        - Chat with natural language
+        - Auto fallback to the fastest working model
+        - Enable web search for real-time answers
 
-        **Model fallback order:**
+        **Model Priority:**
         1. `llama3-70b-8192`
         2. `llama3-8b-8192`
         3. `mistral-saba-24b`
@@ -95,30 +102,30 @@ with st.sidebar:
         - Email: [shub.vardani@gmail.com](mailto:shub.vardani@gmail.com)
         """)
 
-# --- Model Fallback ---
-model_fallbacks = ["llama3-70b-8192", "llama3-8b-8192", "mistral-saba-24b"]
-llm, selected_model = None, None
-
-for model in model_fallbacks:
+# --- Model Setup ---
+llm = None
+if manual_mode and selected_model:
     try:
-        llm = ChatGroq(
-            temperature=temperature,
-            model_name=model,
-            groq_api_key=groq_api_key
-        )
-        selected_model = model
-        break
+        llm = ChatGroq(temperature=temperature, model_name=selected_model, groq_api_key=groq_api_key)
     except Exception as e:
-        print(f"❌ Model failed: {model} → {e}")
-        continue
+        st.error(f"❌ Failed to initialize model `{selected_model}`: {str(e)}")
+        st.stop()
+else:
+    for model in model_options:
+        try:
+            llm = ChatGroq(temperature=temperature, model_name=model, groq_api_key=groq_api_key)
+            selected_model = model
+            break
+        except Exception:
+            continue
 
 if not llm:
-    st.error("❌ Failed to initialize any supported Groq models.")
+    st.error("❌ Could not initialize any model. Check API key or quota.")
     st.stop()
 
 st.sidebar.markdown(f"<span style='color: pink;'>🧠 Using model:</span> <code>{selected_model}</code>", unsafe_allow_html=True)
 
-# --- Tool Integration ---
+# --- Tools ---
 tools = []
 if use_web_search and serpapi_api_key:
     search = SerpAPIWrapper(serpapi_api_key=serpapi_api_key)
@@ -126,7 +133,7 @@ if use_web_search and serpapi_api_key:
         Tool(
             name="Web Search",
             func=search.run,
-            description="Use this for answering questions using web results."
+            description="Useful for real-time questions."
         )
     )
 
@@ -139,7 +146,7 @@ agent = initialize_agent(
     verbose=False
 )
 
-# --- Session State Chat ---
+# --- Chat State ---
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
@@ -147,13 +154,15 @@ if "chat_history" not in st.session_state:
 USER_AVATAR = "https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
 BOT_AVATAR = "https://cdn-icons-png.flaticon.com/512/4712/4712039.png"
 
-# --- Chat UI ---
+# --- Chat Interface ---
 user_input = st.chat_input("Type your message here...")
 
+# Render history
 for msg in st.session_state.chat_history:
     with st.chat_message(msg["role"], avatar=USER_AVATAR if msg["role"] == "user" else BOT_AVATAR):
-        st.markdown(f"<div class='chat-bubble'>{msg['content']}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='chat-bubble {'bot' if msg['role']=='assistant' else ''}'>{msg['content']}</div>", unsafe_allow_html=True)
 
+# Handle input
 if user_input:
     st.chat_message("user", avatar=USER_AVATAR).markdown(f"<div class='chat-bubble'>{user_input}</div>", unsafe_allow_html=True)
     st.session_state.chat_history.append({"role": "user", "content": user_input})
@@ -166,14 +175,14 @@ if user_input:
     st.chat_message("assistant", avatar=BOT_AVATAR).markdown(f"<div class='chat-bubble bot'>{response}</div>", unsafe_allow_html=True)
     st.session_state.chat_history.append({"role": "assistant", "content": response})
 
+    # Save chat log
     with open("chat_log.txt", "a", encoding="utf-8") as f:
         f.write(f"[{datetime.now()}] User: {user_input}\n")
         f.write(f"[{datetime.now()}] Bot: {response}\n\n")
 
-# --- Footer with DP ---
+# --- Footer Avatar ---
 st.markdown("""
-<div class="custom-footer">
-    Created by Shubham Vardani
-    <img src="https://raw.githubusercontent.com/123ShubhamVardani/langchain-chatbot/main/shubham_dp.png">
+<div class="footer-container">
+    <img src="https://raw.githubusercontent.com/123ShubhamVardani/langchain-chatbot/main/shubham_dp.png" alt="Creator DP">
 </div>
 """, unsafe_allow_html=True)
