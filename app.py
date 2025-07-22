@@ -9,7 +9,7 @@ from langchain_community.utilities import SerpAPIWrapper
 
 # --- Load API Keys ---
 load_dotenv()
-groq_api_key = os.getenv("GROQ_API_KEY")
+groq_api_key = "gsk_YpUgKC85bnkbj4ka5QTFWdyb3FYP5gckvfMEDHpGhibJ0mzhJPV" #os.getenv("GROQ_API_KEY")
 serpapi_api_key = "" #os.getenv("SERPAPI_API_KEY")
 
 # --- Page Setup ---
