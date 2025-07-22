@@ -10,7 +10,7 @@ from langchain_community.utilities import SerpAPIWrapper
 # --- Load API Keys ---
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
-serpapi_api_key = os.getenv("SERPAPI_API_KEY")
+serpapi_api_key = "" #os.getenv("SERPAPI_API_KEY")
 
 # --- Page Setup ---
 st.set_page_config(page_title="LangChain Chatbot", layout="wide")
